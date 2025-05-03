@@ -22,6 +22,7 @@ urlpatterns = [
     path('api/', include('translator.urls')),
 ]
 
+import views
 path('', views.home, name='home'),  # Default view when accessing the home page
 
 from django.conf import settings
