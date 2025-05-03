@@ -13,6 +13,7 @@ lara = Translator(credentials)
 
 @api_view(['POST'])
 def translate(request):
+        
     text = request.data.get("text")
     target = request.data.get("target_lang")
     
