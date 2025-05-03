@@ -22,6 +22,8 @@ urlpatterns = [
     path('api/', include('translator.urls')),
 ]
 
+path('', views.home, name='home'),  # Default view when accessing the home page
+
 from django.conf import settings
 from django.conf.urls.static import static
 
