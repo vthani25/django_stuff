@@ -6,8 +6,8 @@ import os
 
 # Securely load credentials from environment variables
 credentials = Credentials(
-    access_key_id=os.getenv('O40OKB4EGU1DRG0PRI867N1J43'),
-    access_key_secret=os.getenv('xSTFpT-KP2gw2TM60MSj0OGYpbtQFG_Eqvvp_oVvnPI')
+    access_key_id='O40OKB4EGU1DRG0PRI867N1J43',
+    access_key_secret='xSTFpT-KP2gw2TM60MSj0OGYpbtQFG_Eqvvp_oVvnPI'
 )
 lara = Translator(credentials)
 
