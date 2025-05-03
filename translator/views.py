@@ -13,18 +13,18 @@ lara = Translator(credentials)
 
 @api_view(['POST'])
 def translate(request):
-        
     text = request.data.get("text")
+    source = request.data.get("source_lang")  # Get source language from the request
     target = request.data.get("target_lang")
     
-    if not text or not target:
-        return Response({'error': 'Text and target language are required'}, status=400)
+    if not text or not source or not target:
+        return Response({'error': 'Text, source language, and target language are required'}, status=400)
     
     try:
         res = lara.translate(
             text,
-            source='en-US',
-            target=target,
+            source=source,  # Use source language dynamically
+            target=target,  # Use target language dynamically
             content_type='text/plain',
             timeout_ms=2000,
             priority=TranslatePriority.NORMAL
@@ -33,21 +33,23 @@ def translate(request):
     except Exception as e:
         return Response({'error': str(e)}, status=500)
 
+
 @api_view(['POST'])
 def translate_bulk(request):
     texts = request.data.get("texts", [])
+    source = request.data.get("source_lang")  # Get source language from the request
     target = request.data.get("target_lang")
     
-    if not texts or not target:
-        return Response({'error': 'Texts and target language are required'}, status=400)
+    if not texts or not source or not target:
+        return Response({'error': 'Texts, source language, and target language are required'}, status=400)
     
     results = []
     try:
         for t in texts:
             res = lara.translate(
                 t,
-                source='en-US',
-                target=target,
+                source=source,  # Use source language dynamically
+                target=target,  # Use target language dynamically
                 content_type='text/plain',
                 timeout_ms=2000,
                 priority=TranslatePriority.NORMAL
@@ -56,3 +58,4 @@ def translate_bulk(request):
         return Response({'translations': results})
     except Exception as e:
         return Response({'error': str(e)}, status=500)
+
